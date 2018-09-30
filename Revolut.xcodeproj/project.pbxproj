@@ -1,0 +1,615 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		CC975F1F215FA6AF0050A2F6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC975F1E215FA6AF0050A2F6 /* AppDelegate.swift */; };
+		CC975F502160D1010050A2F6 /* Fetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC975F4F2160D1010050A2F6 /* Fetcher.swift */; };
+		CC975F522160D11C0050A2F6 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC975F512160D11C0050A2F6 /* Parser.swift */; };
+		CC975F552160D14E0050A2F6 /* RatesList.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC975F542160D14E0050A2F6 /* RatesList.swift */; };
+		CC975F572160D1750050A2F6 /* RatesListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC975F562160D1750050A2F6 /* RatesListService.swift */; };
+		CC975F5A2160D1B10050A2F6 /* Loader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC975F592160D1B10050A2F6 /* Loader.swift */; };
+		CC975F5D2160D1F00050A2F6 /* EndpointsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC975F5C2160D1F00050A2F6 /* EndpointsProvider.swift */; };
+		CC975F612160D4EF0050A2F6 /* JsonParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC975F602160D4EF0050A2F6 /* JsonParserTests.swift */; };
+		CC975F632160D4FA0050A2F6 /* RatesServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC975F622160D4FA0050A2F6 /* RatesServiceTests.swift */; };
+		CC975F662160D5170050A2F6 /* LoaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC975F652160D5170050A2F6 /* LoaderTests.swift */; };
+		CC975F692160DAE70050A2F6 /* RatesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC975F682160DAE70050A2F6 /* RatesListViewController.swift */; };
+		CC975F6B2160DBA70050A2F6 /* RatesListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC975F6A2160DBA70050A2F6 /* RatesListViewController.xib */; };
+		CC975F6F2160DE380050A2F6 /* RateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC975F6E2160DE380050A2F6 /* RateCell.swift */; };
+		CC975F712160DE560050A2F6 /* RateCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC975F702160DE560050A2F6 /* RateCell.xib */; };
+		CC975F742160E3CE0050A2F6 /* RateListPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC975F732160E3CE0050A2F6 /* RateListPresenterTests.swift */; };
+		CC975F762160E4780050A2F6 /* RatesListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC975F752160E4780050A2F6 /* RatesListPresenter.swift */; };
+		CC975F792161204A0050A2F6 /* RatesCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC975F782161204A0050A2F6 /* RatesCalculator.swift */; };
+		CC975F7B216122FA0050A2F6 /* RatesCalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC975F7A216122FA0050A2F6 /* RatesCalculatorTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		CC975F30215FA6B00050A2F6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CC975F13215FA6AF0050A2F6 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CC975F1A215FA6AF0050A2F6;
+			remoteInfo = Revolut;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		CC975F1B215FA6AF0050A2F6 /* Revolut.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Revolut.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CC975F1E215FA6AF0050A2F6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		CC975F2A215FA6B00050A2F6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CC975F2F215FA6B00050A2F6 /* RevolutTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RevolutTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		CC975F35215FA6B00050A2F6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CC975F4F2160D1010050A2F6 /* Fetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fetcher.swift; sourceTree = "<group>"; };
+		CC975F512160D11C0050A2F6 /* Parser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
+		CC975F542160D14E0050A2F6 /* RatesList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatesList.swift; sourceTree = "<group>"; };
+		CC975F562160D1750050A2F6 /* RatesListService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatesListService.swift; sourceTree = "<group>"; };
+		CC975F592160D1B10050A2F6 /* Loader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loader.swift; sourceTree = "<group>"; };
+		CC975F5C2160D1F00050A2F6 /* EndpointsProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndpointsProvider.swift; sourceTree = "<group>"; };
+		CC975F602160D4EF0050A2F6 /* JsonParserTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JsonParserTests.swift; sourceTree = "<group>"; };
+		CC975F622160D4FA0050A2F6 /* RatesServiceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatesServiceTests.swift; sourceTree = "<group>"; };
+		CC975F652160D5170050A2F6 /* LoaderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoaderTests.swift; sourceTree = "<group>"; };
+		CC975F682160DAE70050A2F6 /* RatesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatesListViewController.swift; sourceTree = "<group>"; };
+		CC975F6A2160DBA70050A2F6 /* RatesListViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RatesListViewController.xib; sourceTree = "<group>"; };
+		CC975F6E2160DE380050A2F6 /* RateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateCell.swift; sourceTree = "<group>"; };
+		CC975F702160DE560050A2F6 /* RateCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RateCell.xib; sourceTree = "<group>"; };
+		CC975F732160E3CE0050A2F6 /* RateListPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateListPresenterTests.swift; sourceTree = "<group>"; };
+		CC975F752160E4780050A2F6 /* RatesListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatesListPresenter.swift; sourceTree = "<group>"; };
+		CC975F782161204A0050A2F6 /* RatesCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatesCalculator.swift; sourceTree = "<group>"; };
+		CC975F7A216122FA0050A2F6 /* RatesCalculatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatesCalculatorTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		CC975F18215FA6AF0050A2F6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CC975F2C215FA6B00050A2F6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		CC975F12215FA6AF0050A2F6 = {
+			isa = PBXGroup;
+			children = (
+				CC975F1D215FA6AF0050A2F6 /* Revolut */,
+				CC975F32215FA6B00050A2F6 /* RevolutTests */,
+				CC975F1C215FA6AF0050A2F6 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		CC975F1C215FA6AF0050A2F6 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CC975F1B215FA6AF0050A2F6 /* Revolut.app */,
+				CC975F2F215FA6B00050A2F6 /* RevolutTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CC975F1D215FA6AF0050A2F6 /* Revolut */ = {
+			isa = PBXGroup;
+			children = (
+				CC975F492160D0A90050A2F6 /* Domain */,
+				CC975F482160D0A10050A2F6 /* Core */,
+				CC975F672160DACE0050A2F6 /* Presentation */,
+				CC975F1E215FA6AF0050A2F6 /* AppDelegate.swift */,
+				CC975F2A215FA6B00050A2F6 /* Info.plist */,
+			);
+			path = Revolut;
+			sourceTree = "<group>";
+		};
+		CC975F32215FA6B00050A2F6 /* RevolutTests */ = {
+			isa = PBXGroup;
+			children = (
+				CC975F722160E3BB0050A2F6 /* Presentation */,
+				CC975F5F2160D4BE0050A2F6 /* Core */,
+				CC975F5E2160D4B30050A2F6 /* Domain */,
+				CC975F35215FA6B00050A2F6 /* Info.plist */,
+			);
+			path = RevolutTests;
+			sourceTree = "<group>";
+		};
+		CC975F482160D0A10050A2F6 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				CC975F582160D1A90050A2F6 /* Loader */,
+				CC975F4B2160D0BC0050A2F6 /* Network */,
+				CC975F4A2160D0B50050A2F6 /* Parsing */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		CC975F492160D0A90050A2F6 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				CC975F772161203F0050A2F6 /* Calculator */,
+				CC975F5B2160D1D00050A2F6 /* Endpoints */,
+				CC975F532160D1350050A2F6 /* RatesList */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		CC975F4A2160D0B50050A2F6 /* Parsing */ = {
+			isa = PBXGroup;
+			children = (
+				CC975F512160D11C0050A2F6 /* Parser.swift */,
+			);
+			path = Parsing;
+			sourceTree = "<group>";
+		};
+		CC975F4B2160D0BC0050A2F6 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				CC975F4F2160D1010050A2F6 /* Fetcher.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		CC975F532160D1350050A2F6 /* RatesList */ = {
+			isa = PBXGroup;
+			children = (
+				CC975F542160D14E0050A2F6 /* RatesList.swift */,
+				CC975F562160D1750050A2F6 /* RatesListService.swift */,
+			);
+			path = RatesList;
+			sourceTree = "<group>";
+		};
+		CC975F582160D1A90050A2F6 /* Loader */ = {
+			isa = PBXGroup;
+			children = (
+				CC975F592160D1B10050A2F6 /* Loader.swift */,
+			);
+			path = Loader;
+			sourceTree = "<group>";
+		};
+		CC975F5B2160D1D00050A2F6 /* Endpoints */ = {
+			isa = PBXGroup;
+			children = (
+				CC975F5C2160D1F00050A2F6 /* EndpointsProvider.swift */,
+			);
+			path = Endpoints;
+			sourceTree = "<group>";
+		};
+		CC975F5E2160D4B30050A2F6 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				CC975F622160D4FA0050A2F6 /* RatesServiceTests.swift */,
+				CC975F7A216122FA0050A2F6 /* RatesCalculatorTests.swift */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		CC975F5F2160D4BE0050A2F6 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				CC975F602160D4EF0050A2F6 /* JsonParserTests.swift */,
+				CC975F652160D5170050A2F6 /* LoaderTests.swift */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		CC975F672160DACE0050A2F6 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				CC975F6C2160DE250050A2F6 /* RatesList */,
+				CC975F682160DAE70050A2F6 /* RatesListViewController.swift */,
+				CC975F6A2160DBA70050A2F6 /* RatesListViewController.xib */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		CC975F6C2160DE250050A2F6 /* RatesList */ = {
+			isa = PBXGroup;
+			children = (
+				CC975F6D2160DE2C0050A2F6 /* Views */,
+				CC975F752160E4780050A2F6 /* RatesListPresenter.swift */,
+			);
+			path = RatesList;
+			sourceTree = "<group>";
+		};
+		CC975F6D2160DE2C0050A2F6 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				CC975F6E2160DE380050A2F6 /* RateCell.swift */,
+				CC975F702160DE560050A2F6 /* RateCell.xib */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		CC975F722160E3BB0050A2F6 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				CC975F732160E3CE0050A2F6 /* RateListPresenterTests.swift */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		CC975F772161203F0050A2F6 /* Calculator */ = {
+			isa = PBXGroup;
+			children = (
+				CC975F782161204A0050A2F6 /* RatesCalculator.swift */,
+			);
+			path = Calculator;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		CC975F1A215FA6AF0050A2F6 /* Revolut */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CC975F38215FA6B00050A2F6 /* Build configuration list for PBXNativeTarget "Revolut" */;
+			buildPhases = (
+				CC975F17215FA6AF0050A2F6 /* Sources */,
+				CC975F18215FA6AF0050A2F6 /* Frameworks */,
+				CC975F19215FA6AF0050A2F6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Revolut;
+			productName = Revolut;
+			productReference = CC975F1B215FA6AF0050A2F6 /* Revolut.app */;
+			productType = "com.apple.product-type.application";
+		};
+		CC975F2E215FA6B00050A2F6 /* RevolutTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CC975F3B215FA6B00050A2F6 /* Build configuration list for PBXNativeTarget "RevolutTests" */;
+			buildPhases = (
+				CC975F2B215FA6B00050A2F6 /* Sources */,
+				CC975F2C215FA6B00050A2F6 /* Frameworks */,
+				CC975F2D215FA6B00050A2F6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CC975F31215FA6B00050A2F6 /* PBXTargetDependency */,
+			);
+			name = RevolutTests;
+			productName = RevolutTests;
+			productReference = CC975F2F215FA6B00050A2F6 /* RevolutTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		CC975F13215FA6AF0050A2F6 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1000;
+				LastUpgradeCheck = 1000;
+				ORGANIZATIONNAME = andjash;
+				TargetAttributes = {
+					CC975F1A215FA6AF0050A2F6 = {
+						CreatedOnToolsVersion = 10.0;
+					};
+					CC975F2E215FA6B00050A2F6 = {
+						CreatedOnToolsVersion = 10.0;
+						LastSwiftMigration = 1000;
+						TestTargetID = CC975F1A215FA6AF0050A2F6;
+					};
+				};
+			};
+			buildConfigurationList = CC975F16215FA6AF0050A2F6 /* Build configuration list for PBXProject "Revolut" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = CC975F12215FA6AF0050A2F6;
+			productRefGroup = CC975F1C215FA6AF0050A2F6 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				CC975F1A215FA6AF0050A2F6 /* Revolut */,
+				CC975F2E215FA6B00050A2F6 /* RevolutTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		CC975F19215FA6AF0050A2F6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CC975F6B2160DBA70050A2F6 /* RatesListViewController.xib in Resources */,
+				CC975F712160DE560050A2F6 /* RateCell.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CC975F2D215FA6B00050A2F6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		CC975F17215FA6AF0050A2F6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CC975F762160E4780050A2F6 /* RatesListPresenter.swift in Sources */,
+				CC975F572160D1750050A2F6 /* RatesListService.swift in Sources */,
+				CC975F5D2160D1F00050A2F6 /* EndpointsProvider.swift in Sources */,
+				CC975F792161204A0050A2F6 /* RatesCalculator.swift in Sources */,
+				CC975F6F2160DE380050A2F6 /* RateCell.swift in Sources */,
+				CC975F552160D14E0050A2F6 /* RatesList.swift in Sources */,
+				CC975F522160D11C0050A2F6 /* Parser.swift in Sources */,
+				CC975F692160DAE70050A2F6 /* RatesListViewController.swift in Sources */,
+				CC975F1F215FA6AF0050A2F6 /* AppDelegate.swift in Sources */,
+				CC975F5A2160D1B10050A2F6 /* Loader.swift in Sources */,
+				CC975F502160D1010050A2F6 /* Fetcher.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CC975F2B215FA6B00050A2F6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CC975F662160D5170050A2F6 /* LoaderTests.swift in Sources */,
+				CC975F612160D4EF0050A2F6 /* JsonParserTests.swift in Sources */,
+				CC975F742160E3CE0050A2F6 /* RateListPresenterTests.swift in Sources */,
+				CC975F7B216122FA0050A2F6 /* RatesCalculatorTests.swift in Sources */,
+				CC975F632160D4FA0050A2F6 /* RatesServiceTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		CC975F31215FA6B00050A2F6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CC975F1A215FA6AF0050A2F6 /* Revolut */;
+			targetProxy = CC975F30215FA6B00050A2F6 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		CC975F36215FA6B00050A2F6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		CC975F37215FA6B00050A2F6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		CC975F39215FA6B00050A2F6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Q7HN8SE4G7;
+				INFOPLIST_FILE = Revolut/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = ru.andjash.Revolut;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		CC975F3A215FA6B00050A2F6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Q7HN8SE4G7;
+				INFOPLIST_FILE = Revolut/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = ru.andjash.Revolut;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		CC975F3C215FA6B00050A2F6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Q7HN8SE4G7;
+				INFOPLIST_FILE = RevolutTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = ru.andjash.RevolutTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Revolut.app/Revolut";
+			};
+			name = Debug;
+		};
+		CC975F3D215FA6B00050A2F6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Q7HN8SE4G7;
+				INFOPLIST_FILE = RevolutTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = ru.andjash.RevolutTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Revolut.app/Revolut";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		CC975F16215FA6AF0050A2F6 /* Build configuration list for PBXProject "Revolut" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CC975F36215FA6B00050A2F6 /* Debug */,
+				CC975F37215FA6B00050A2F6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CC975F38215FA6B00050A2F6 /* Build configuration list for PBXNativeTarget "Revolut" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CC975F39215FA6B00050A2F6 /* Debug */,
+				CC975F3A215FA6B00050A2F6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CC975F3B215FA6B00050A2F6 /* Build configuration list for PBXNativeTarget "RevolutTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CC975F3C215FA6B00050A2F6 /* Debug */,
+				CC975F3D215FA6B00050A2F6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = CC975F13215FA6AF0050A2F6 /* Project object */;
+}
