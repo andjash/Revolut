@@ -36,7 +36,7 @@ class RatesCalculator {
         } else {
             crossCurrencyRate = rates[crossCurrency]
         }
-        
+        7
         guard crossCurrencyRate != nil else {
             return nil
         }

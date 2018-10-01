@@ -47,7 +47,7 @@ class RatesListPresenter {
         numberFormatter.maximumFractionDigits = 2
         numberFormatter.minimumFractionDigits = 0
         numberFormatter.generatesDecimalNumbers = true
-        numberFormatter.maximumIntegerDigits = Int.max
+        numberFormatter.roundingMode = .down
         
         origin = Origin(amount: Decimal(floatLiteral: 1), currency: baseCurrency, displayValue: numberFormatter.string(from: NSDecimalNumber.one) ?? "1")
     }
@@ -65,24 +65,25 @@ class RatesListPresenter {
     
     func didEditValue(forEntry: DataEntry, newValue: String) {
         let preparedString = newValue.replacingOccurrences(of: numberFormatter.groupingSeparator, with: "")
-        
-        var editedResult = numberFormatter.number(from: preparedString) as? Decimal ?? Decimal(floatLiteral: 0)
-        if editedResult.isNaN {
-            editedResult = Decimal(floatLiteral: 0)
+        var number = numberFormatter.number(from: preparedString) as? Decimal ?? Decimal(0)
+        if number.isNaN {
+            number = Decimal(0)
         }
-        
-        var displayValue = numberFormatter.string(from: editedResult as NSDecimalNumber) ?? "0"
+
+        var displayValue = numberFormatter.string(from: number as NSDecimalNumber) ?? "0"
         if newValue.hasSuffix(numberFormatter.decimalSeparator) {
             displayValue += numberFormatter.decimalSeparator
         }
         
-        origin = Origin(amount: editedResult, currency: forEntry.currencyName, displayValue: displayValue)
+        let roundedNumber = numberFormatter.number(from: displayValue) as? Decimal ?? Decimal(0)
+        
+        origin = Origin(amount: roundedNumber, currency: forEntry.currencyName, displayValue: displayValue)
         data = recalculate(oldData: data, calculator: ratesCalculator, origin: origin)
         delegate?.display(data: data)
     }
     
     // MARK: - Private
-    
+
     private func loadData() {
         let latestOrigin = origin
         DispatchQueue.global(qos: .background).async {
@@ -106,7 +107,9 @@ class RatesListPresenter {
             }
             
             return DataEntry(currencyName: tuple.key, value: calculatedValueString ?? "0")
-        }
+        }.sorted(by: { (l, r) -> Bool in
+            return l.currencyName < r.currencyName
+        })
     }
     
     private func recalculate(oldData: [DataEntry], calculator: RatesCalculator, origin: Origin) -> [DataEntry] {
