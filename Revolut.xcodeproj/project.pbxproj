@@ -25,6 +25,7 @@
 		CC975F762160E4780050A2F6 /* RatesListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC975F752160E4780050A2F6 /* RatesListPresenter.swift */; };
 		CC975F792161204A0050A2F6 /* RatesCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC975F782161204A0050A2F6 /* RatesCalculator.swift */; };
 		CC975F7B216122FA0050A2F6 /* RatesCalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC975F7A216122FA0050A2F6 /* RatesCalculatorTests.swift */; };
+		CC975F7E216205440050A2F6 /* Decimal+Rounding.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC975F7D216205440050A2F6 /* Decimal+Rounding.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +61,7 @@
 		CC975F752160E4780050A2F6 /* RatesListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatesListPresenter.swift; sourceTree = "<group>"; };
 		CC975F782161204A0050A2F6 /* RatesCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatesCalculator.swift; sourceTree = "<group>"; };
 		CC975F7A216122FA0050A2F6 /* RatesCalculatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatesCalculatorTests.swift; sourceTree = "<group>"; };
+		CC975F7D216205440050A2F6 /* Decimal+Rounding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Decimal+Rounding.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,6 +136,7 @@
 		CC975F492160D0A90050A2F6 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
+				CC975F7C216205380050A2F6 /* Categories */,
 				CC975F772161203F0050A2F6 /* Calculator */,
 				CC975F5B2160D1D00050A2F6 /* Endpoints */,
 				CC975F532160D1350050A2F6 /* RatesList */,
@@ -242,6 +245,14 @@
 				CC975F782161204A0050A2F6 /* RatesCalculator.swift */,
 			);
 			path = Calculator;
+			sourceTree = "<group>";
+		};
+		CC975F7C216205380050A2F6 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				CC975F7D216205440050A2F6 /* Decimal+Rounding.swift */,
+			);
+			path = Categories;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -354,6 +365,7 @@
 				CC975F522160D11C0050A2F6 /* Parser.swift in Sources */,
 				CC975F692160DAE70050A2F6 /* RatesListViewController.swift in Sources */,
 				CC975F1F215FA6AF0050A2F6 /* AppDelegate.swift in Sources */,
+				CC975F7E216205440050A2F6 /* Decimal+Rounding.swift in Sources */,
 				CC975F5A2160D1B10050A2F6 /* Loader.swift in Sources */,
 				CC975F502160D1010050A2F6 /* Fetcher.swift in Sources */,
 			);

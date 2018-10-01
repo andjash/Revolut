@@ -13,19 +13,9 @@ class RatesCalculator {
     let base: String
     let rates: [String : Decimal]
     
-    private let decimalHandler: NSDecimalNumberHandler
-    
     init(base: String, rates: [String : Decimal]) {
         self.base = base
         self.rates = rates
-        
-        let defaultHandler = NSDecimalNumberHandler.default
-        decimalHandler = NSDecimalNumberHandler(roundingMode: defaultHandler.roundingMode(),
-                                                scale: defaultHandler.scale(),
-                                                raiseOnExactness: false,
-                                                raiseOnOverflow: false,
-                                                raiseOnUnderflow: false,
-                                                raiseOnDivideByZero: false)
     }
     
     func amount(ofCurrency target: String, withOther crossCurrency: String, amount crossAmount: Decimal) -> Decimal? {
@@ -33,10 +23,12 @@ class RatesCalculator {
         
         if crossCurrency == base {
             crossCurrencyRate = Decimal(integerLiteral: 1)
+        } else if target == crossCurrency {
+            return crossAmount
         } else {
             crossCurrencyRate = rates[crossCurrency]
         }
-        7
+        
         guard crossCurrencyRate != nil else {
             return nil
         }
@@ -52,9 +44,8 @@ class RatesCalculator {
             return nil
         }
         
-        let amountOfBase = crossAmount / crossCurrencyRate
-        let result = amountOfBase * targetCurrencyRate
-        return result
+        let amountOfBase = (crossAmount / crossCurrencyRate).roundedCurrency
+        return (amountOfBase * targetCurrencyRate).roundedCurrency
     }
     
     

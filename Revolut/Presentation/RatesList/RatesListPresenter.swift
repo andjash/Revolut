@@ -65,7 +65,7 @@ class RatesListPresenter {
     
     func didEditValue(forEntry: DataEntry, newValue: String) {
         let preparedString = newValue.replacingOccurrences(of: numberFormatter.groupingSeparator, with: "")
-        var number = numberFormatter.number(from: preparedString) as? Decimal ?? Decimal(0)
+        var number = (numberFormatter.number(from: preparedString) as? Decimal ?? Decimal(0)).roundedDownCurrency
         if number.isNaN {
             number = Decimal(0)
         }
@@ -74,10 +74,8 @@ class RatesListPresenter {
         if newValue.hasSuffix(numberFormatter.decimalSeparator) {
             displayValue += numberFormatter.decimalSeparator
         }
-        
-        let roundedNumber = numberFormatter.number(from: displayValue) as? Decimal ?? Decimal(0)
-        
-        origin = Origin(amount: roundedNumber, currency: forEntry.currencyName, displayValue: displayValue)
+     
+        origin = Origin(amount: number, currency: forEntry.currencyName, displayValue: displayValue)
         data = recalculate(oldData: data, calculator: ratesCalculator, origin: origin)
         delegate?.display(data: data)
     }

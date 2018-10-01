@@ -20,7 +20,7 @@ class RatesCalculatorTests: XCTestCase {
         let base = "EUR"
         let rates = ["RUB" : rubRate, "USD" : usdRate]
         let calculator = RatesCalculator(base: base, rates: rates)
-        let control = (usdAmount / usdRate) * rubRate
+        let control = ((usdAmount / usdRate).roundedCurrency * rubRate).roundedCurrency
         
         let test = calculator.amount(ofCurrency: "RUB", withOther: "USD", amount: usdAmount)
         
@@ -90,7 +90,7 @@ class RatesCalculatorTests: XCTestCase {
         let base = "EUR"
         let rates = ["RUB" : rubRate, "USD" : usdRate]
         let calculator = RatesCalculator(base: base, rates: rates)
-        let control = Decimal(33.5423)
+        let control = Decimal(33.54).roundedCurrency
         
         let test = calculator.amount(ofCurrency: "RUB", withOther: "RUB", amount: control)
         
@@ -156,6 +156,30 @@ class RatesCalculatorTests: XCTestCase {
         let test = calculator.amount(ofCurrency: "RUB", withOther: "USD", amount: Decimal(1))
         
         XCTAssert(test == Decimal(0))
+    }
+    
+    func testMoneyRoundsUp() {
+        let rubrate = Decimal(65.31)
+        
+        let base = "EUR"
+        let rates = ["RUB" : rubrate]
+        let calculator = RatesCalculator(base: base, rates: rates)
+        
+        let test = calculator.amount(ofCurrency: "RUB", withOther: "EUR", amount: Decimal(0.5))
+        
+        XCTAssert(test == Decimal(32.66).roundedCurrency)
+    }
+    
+    func testMoneyRoundsDown() {
+        let rubrate = Decimal(65.31)
+        
+        let base = "EUR"
+        let rates = ["RUB" : rubrate]
+        let calculator = RatesCalculator(base: base, rates: rates)
+        
+        let test = calculator.amount(ofCurrency: "RUB", withOther: "EUR", amount: Decimal(0.2))
+        
+        XCTAssert(test == Decimal(13.06))
     }
     
 }
