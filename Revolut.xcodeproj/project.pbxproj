@@ -17,8 +17,6 @@
 		CC975F612160D4EF0050A2F6 /* JsonParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC975F602160D4EF0050A2F6 /* JsonParserTests.swift */; };
 		CC975F632160D4FA0050A2F6 /* RatesServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC975F622160D4FA0050A2F6 /* RatesServiceTests.swift */; };
 		CC975F662160D5170050A2F6 /* LoaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC975F652160D5170050A2F6 /* LoaderTests.swift */; };
-		CC975F692160DAE70050A2F6 /* RatesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC975F682160DAE70050A2F6 /* RatesListViewController.swift */; };
-		CC975F6B2160DBA70050A2F6 /* RatesListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC975F6A2160DBA70050A2F6 /* RatesListViewController.xib */; };
 		CC975F6F2160DE380050A2F6 /* RateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC975F6E2160DE380050A2F6 /* RateCell.swift */; };
 		CC975F712160DE560050A2F6 /* RateCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC975F702160DE560050A2F6 /* RateCell.xib */; };
 		CC975F742160E3CE0050A2F6 /* RateListPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC975F732160E3CE0050A2F6 /* RateListPresenterTests.swift */; };
@@ -26,6 +24,8 @@
 		CC975F792161204A0050A2F6 /* RatesCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC975F782161204A0050A2F6 /* RatesCalculator.swift */; };
 		CC975F7B216122FA0050A2F6 /* RatesCalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC975F7A216122FA0050A2F6 /* RatesCalculatorTests.swift */; };
 		CC975F7E216205440050A2F6 /* Decimal+Rounding.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC975F7D216205440050A2F6 /* Decimal+Rounding.swift */; };
+		CCBEB2D12162B37E0041CB53 /* RatesListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CCBEB2CF2162B37E0041CB53 /* RatesListViewController.xib */; };
+		CCBEB2D22162B37E0041CB53 /* RatesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBEB2D02162B37E0041CB53 /* RatesListViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,8 +53,6 @@
 		CC975F602160D4EF0050A2F6 /* JsonParserTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JsonParserTests.swift; sourceTree = "<group>"; };
 		CC975F622160D4FA0050A2F6 /* RatesServiceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatesServiceTests.swift; sourceTree = "<group>"; };
 		CC975F652160D5170050A2F6 /* LoaderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoaderTests.swift; sourceTree = "<group>"; };
-		CC975F682160DAE70050A2F6 /* RatesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatesListViewController.swift; sourceTree = "<group>"; };
-		CC975F6A2160DBA70050A2F6 /* RatesListViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RatesListViewController.xib; sourceTree = "<group>"; };
 		CC975F6E2160DE380050A2F6 /* RateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateCell.swift; sourceTree = "<group>"; };
 		CC975F702160DE560050A2F6 /* RateCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RateCell.xib; sourceTree = "<group>"; };
 		CC975F732160E3CE0050A2F6 /* RateListPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateListPresenterTests.swift; sourceTree = "<group>"; };
@@ -62,6 +60,8 @@
 		CC975F782161204A0050A2F6 /* RatesCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatesCalculator.swift; sourceTree = "<group>"; };
 		CC975F7A216122FA0050A2F6 /* RatesCalculatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatesCalculatorTests.swift; sourceTree = "<group>"; };
 		CC975F7D216205440050A2F6 /* Decimal+Rounding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Decimal+Rounding.swift"; sourceTree = "<group>"; };
+		CCBEB2CF2162B37E0041CB53 /* RatesListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RatesListViewController.xib; sourceTree = "<group>"; };
+		CCBEB2D02162B37E0041CB53 /* RatesListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatesListViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -207,8 +207,6 @@
 			isa = PBXGroup;
 			children = (
 				CC975F6C2160DE250050A2F6 /* RatesList */,
-				CC975F682160DAE70050A2F6 /* RatesListViewController.swift */,
-				CC975F6A2160DBA70050A2F6 /* RatesListViewController.xib */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -218,6 +216,8 @@
 			children = (
 				CC975F6D2160DE2C0050A2F6 /* Views */,
 				CC975F752160E4780050A2F6 /* RatesListPresenter.swift */,
+				CCBEB2D02162B37E0041CB53 /* RatesListViewController.swift */,
+				CCBEB2CF2162B37E0041CB53 /* RatesListViewController.xib */,
 			);
 			path = RatesList;
 			sourceTree = "<group>";
@@ -337,7 +337,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CC975F6B2160DBA70050A2F6 /* RatesListViewController.xib in Resources */,
+				CCBEB2D12162B37E0041CB53 /* RatesListViewController.xib in Resources */,
 				CC975F712160DE560050A2F6 /* RateCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -358,12 +358,12 @@
 			files = (
 				CC975F762160E4780050A2F6 /* RatesListPresenter.swift in Sources */,
 				CC975F572160D1750050A2F6 /* RatesListService.swift in Sources */,
+				CCBEB2D22162B37E0041CB53 /* RatesListViewController.swift in Sources */,
 				CC975F5D2160D1F00050A2F6 /* EndpointsProvider.swift in Sources */,
 				CC975F792161204A0050A2F6 /* RatesCalculator.swift in Sources */,
 				CC975F6F2160DE380050A2F6 /* RateCell.swift in Sources */,
 				CC975F552160D14E0050A2F6 /* RatesList.swift in Sources */,
 				CC975F522160D11C0050A2F6 /* Parser.swift in Sources */,
-				CC975F692160DAE70050A2F6 /* RatesListViewController.swift in Sources */,
 				CC975F1F215FA6AF0050A2F6 /* AppDelegate.swift in Sources */,
 				CC975F7E216205440050A2F6 /* Decimal+Rounding.swift in Sources */,
 				CC975F5A2160D1B10050A2F6 /* Loader.swift in Sources */,

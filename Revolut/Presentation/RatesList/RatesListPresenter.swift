@@ -11,6 +11,7 @@ import Foundation
 protocol RatesListPresenterDelegate: class {
     func display(data: [RatesListPresenter.DataEntry])
     func focusEntry(atIndex: Int, allData: [RatesListPresenter.DataEntry])
+    func display(error: String)
 }
 
 class RatesListPresenter {
@@ -35,6 +36,7 @@ class RatesListPresenter {
     private let numberFormatter: NumberFormatter
     
     weak var delegate: RatesListPresenterDelegate?
+    var updatePeriod: TimeInterval = 1
     
     init(rateListService: RatesListService, baseCurrency: String) {
         self.rateListService = rateListService
@@ -85,15 +87,28 @@ class RatesListPresenter {
     private func loadData() {
         let latestOrigin = origin
         DispatchQueue.global(qos: .background).async {
-            let ratesList = try! self.rateListService.getRates(withBase: self.baseCurrency)
+            var ratesList: RatesList!
+            
+            do {
+                ratesList = try self.rateListService.getRates(withBase: self.baseCurrency)
+            } catch {
+                DispatchQueue.main.async {
+                    self.delegate?.display(error: "Unable to load data")
+                }
+                return
+            }
             let newCalculator = RatesCalculator(base: ratesList.base, rates: ratesList.rates)
             let newData = self.createNewData(calculator: newCalculator, origin: latestOrigin)
                 
-                DispatchQueue.main.async {
-                    self.data = newData
-                    self.ratesCalculator = newCalculator
-                    self.delegate?.display(data: newData)
-                }
+            DispatchQueue.main.async {
+                self.data = newData
+                self.ratesCalculator = newCalculator
+                self.delegate?.display(data: newData)
+            }
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + self.updatePeriod, execute: { [weak wself = self] in
+                wself?.loadData()
+            })
         }
     }
     

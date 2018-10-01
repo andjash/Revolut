@@ -10,7 +10,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RevolutTests/Domain/RatesCalculatorTests.swift"
-            timestampString = "560113259.617624"
+            timestampString = "560118434.893448"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "93"
@@ -25,13 +25,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Revolut/Presentation/RatesList/RatesListPresenter.swift"
-            timestampString = "560073158.800908"
+            filePath = "RevolutTests/Domain/RatesCalculatorTests.swift"
+            timestampString = "560118434.893526"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "67"
-            endingLineNumber = "67"
-            landmarkName = "didEditValue(forEntry:newValue:)"
+            startingLineNumber = "168"
+            endingLineNumber = "168"
+            landmarkName = "testMoneyRoundsUp()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -41,13 +41,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "RevolutTests/Domain/RatesCalculatorTests.swift"
-            timestampString = "560113259.618185"
+            filePath = "RevolutTests/Presentation/RateListPresenterTests.swift"
+            timestampString = "560118434.893585"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "168"
-            endingLineNumber = "168"
-            landmarkName = "testMoneyRoundsUp()"
+            startingLineNumber = "162"
+            endingLineNumber = "162"
+            landmarkName = "testShouldSaveOrderAfterAutoUpdate()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

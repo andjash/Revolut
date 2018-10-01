@@ -17,7 +17,24 @@ class RatesListViewController: UIViewController, UITableViewDelegate, UITableVie
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var placeholderLabel: UILabel!
     
+    var loadingIndicatorVisible : Bool {
+        get {
+            return activityIndicator.isAnimating
+        }
+        set {
+            if newValue {
+                activityIndicator.alpha = 1
+                activityIndicator.startAnimating()
+                tableView.alpha = 0
+                placeholderLabel.alpha = 0
+            } else {
+                activityIndicator.alpha = 0
+                activityIndicator.stopAnimating()
+            }
+        }
+    }
     
     required init(presenter: RatesListPresenter) {
         self.presenter = presenter
@@ -36,9 +53,7 @@ class RatesListViewController: UIViewController, UITableViewDelegate, UITableVie
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.register(UINib(nibName: String(describing: RateCell.self), bundle: nil), forCellReuseIdentifier: String(describing: RateCell.self))
-        tableView.alpha = 0
-        activityIndicator.alpha = 1
-        activityIndicator.startAnimating()
+        loadingIndicatorVisible = true
         presenter.viewIsReady()
     }
     
@@ -69,11 +84,13 @@ class RatesListViewController: UIViewController, UITableViewDelegate, UITableVie
     // MARK: - RatesListPresenterDelegate
     
     func display(data newData: [RatesListPresenter.DataEntry]) {
-        if (activityIndicator.isAnimating) {
-            activityIndicator.alpha = 0
-            activityIndicator.stopAnimating()
-            tableView.alpha = 1
+        loadingIndicatorVisible = false
+        
+        if (newData.count == 0) {
+            displayPlacehodler(with: "No data")
+            return
         }
+        tableView.alpha = 1
         
         if data.count == newData.count {
             data = newData
@@ -103,6 +120,11 @@ class RatesListViewController: UIViewController, UITableViewDelegate, UITableVie
                 cell.textField.indexPath = ip
             }
         }
+    }
+    
+    func display(error: String) {
+        loadingIndicatorVisible = false
+        displayPlacehodler(with: error)
     }
     
     // MARK: - UITextFieldDelegate
@@ -137,6 +159,13 @@ class RatesListViewController: UIViewController, UITableViewDelegate, UITableVie
         cell.currencyNameLabel.text = entry.currencyName
         cell.textField.text = entry.value
     }
+    
+    private func displayPlacehodler(with text: String) {
+        tableView.alpha = 0
+        placeholderLabel.alpha = 1
+        placeholderLabel.text = text
+    }
+    
     
 }
 
