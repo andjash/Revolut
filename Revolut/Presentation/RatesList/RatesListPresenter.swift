@@ -21,7 +21,7 @@ class RatesListPresenter {
     }
     
     private struct Origin {
-        let amount: NSDecimalNumber
+        let amount: Decimal
         let currency: String
         let displayValue: String
     }
@@ -49,7 +49,7 @@ class RatesListPresenter {
         numberFormatter.generatesDecimalNumbers = true
         numberFormatter.maximumIntegerDigits = Int.max
         
-        origin = Origin(amount: NSDecimalNumber.one, currency: baseCurrency, displayValue: numberFormatter.string(from: NSDecimalNumber.one) ?? "1")
+        origin = Origin(amount: Decimal(floatLiteral: 1), currency: baseCurrency, displayValue: numberFormatter.string(from: NSDecimalNumber.one) ?? "1")
     }
     
     // MARK - Input
@@ -66,12 +66,12 @@ class RatesListPresenter {
     func didEditValue(forEntry: DataEntry, newValue: String) {
         let preparedString = newValue.replacingOccurrences(of: numberFormatter.groupingSeparator, with: "")
         
-        var editedResult = numberFormatter.number(from: preparedString) as? NSDecimalNumber ?? NSDecimalNumber.zero
-        if editedResult == NSDecimalNumber.notANumber {
-            editedResult = NSDecimalNumber.zero
+        var editedResult = numberFormatter.number(from: preparedString) as? Decimal ?? Decimal(floatLiteral: 0)
+        if editedResult.isNaN {
+            editedResult = Decimal(floatLiteral: 0)
         }
         
-        var displayValue = numberFormatter.string(from: editedResult) ?? "0"
+        var displayValue = numberFormatter.string(from: editedResult as NSDecimalNumber) ?? "0"
         if newValue.hasSuffix(numberFormatter.decimalSeparator) {
             displayValue += numberFormatter.decimalSeparator
         }
@@ -87,13 +87,7 @@ class RatesListPresenter {
         let latestOrigin = origin
         DispatchQueue.global(qos: .background).async {
             let ratesList = try! self.rateListService.getRates(withBase: self.baseCurrency)
-            var properRates: [String : NSDecimalNumber] = [:]
-            
-            ratesList.rates.forEach{ tuple in
-                properRates[tuple.key] = NSDecimalNumber(value: tuple.value)
-            }
-            
-            let newCalculator = RatesCalculator(base: ratesList.base, rates: properRates)
+            let newCalculator = RatesCalculator(base: ratesList.base, rates: ratesList.rates)
             let newData = self.createNewData(calculator: newCalculator, origin: latestOrigin)
                 
                 DispatchQueue.main.async {
@@ -108,7 +102,7 @@ class RatesListPresenter {
         return calculator.rates.map { tuple in
             var calculatedValueString: String?
             if let value = calculator.amount(ofCurrency: tuple.key, withOther: origin.currency, amount: origin.amount) {
-                calculatedValueString = numberFormatter.string(from: value)
+                calculatedValueString = numberFormatter.string(from: value as NSDecimalNumber)
             }
             
             return DataEntry(currencyName: tuple.key, value: calculatedValueString ?? "0")
@@ -122,7 +116,7 @@ class RatesListPresenter {
                 calculatedValueString = origin.displayValue
             } else {
                 if let value = calculator.amount(ofCurrency: entry.currencyName, withOther: origin.currency, amount: origin.amount) {
-                    calculatedValueString = numberFormatter.string(from: value)
+                    calculatedValueString = numberFormatter.string(from: value as NSDecimalNumber)
                 }
             }
             return DataEntry(currencyName: entry.currencyName, value: calculatedValueString ?? "0")

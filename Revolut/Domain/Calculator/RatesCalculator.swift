@@ -11,11 +11,11 @@ import Foundation
 class RatesCalculator {
     
     let base: String
-    let rates: [String : NSDecimalNumber]
+    let rates: [String : Decimal]
     
     private let decimalHandler: NSDecimalNumberHandler
     
-    init(base: String, rates: [String : NSDecimalNumber]) {
+    init(base: String, rates: [String : Decimal]) {
         self.base = base
         self.rates = rates
         
@@ -28,11 +28,11 @@ class RatesCalculator {
                                                 raiseOnDivideByZero: false)
     }
     
-    func amount(ofCurrency target: String, withOther crossCurrency: String, amount crossAmount: NSDecimalNumber) -> NSDecimalNumber? {
-        var crossCurrencyRate: NSDecimalNumber!
+    func amount(ofCurrency target: String, withOther crossCurrency: String, amount crossAmount: Decimal) -> Decimal? {
+        var crossCurrencyRate: Decimal!
         
         if crossCurrency == base {
-            crossCurrencyRate = NSDecimalNumber.one
+            crossCurrencyRate = Decimal(integerLiteral: 1)
         } else {
             crossCurrencyRate = rates[crossCurrency]
         }
@@ -45,9 +45,16 @@ class RatesCalculator {
             return nil
         }
         
-        let amountOfBase = crossAmount.dividing(by: crossCurrencyRate, withBehavior: decimalHandler)
-        let result = amountOfBase.multiplying(by: targetCurrencyRate, withBehavior: decimalHandler)
-        return result == NSDecimalNumber.notANumber ? nil : result
+        guard !crossCurrencyRate.isZero,
+            !crossAmount.isNaN,
+            !crossCurrencyRate.isNaN,
+            !targetCurrencyRate.isNaN else {
+            return nil
+        }
+        
+        let amountOfBase = crossAmount / crossCurrencyRate
+        let result = amountOfBase * targetCurrencyRate
+        return result
     }
     
     

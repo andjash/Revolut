@@ -13,15 +13,14 @@ import XCTest
 class RatesCalculatorTests: XCTestCase {
     
     func testCrossCurrencyProperlyCalculated() {
-        let rubRate = NSDecimalNumber(string: "80")
-        let usdRate = NSDecimalNumber(string: "1.2")
-        let usdAmount = NSDecimalNumber(string: "1")
+        let rubRate = Decimal(80)
+        let usdRate = Decimal(1.2)
+        let usdAmount = Decimal(1)
         
         let base = "EUR"
         let rates = ["RUB" : rubRate, "USD" : usdRate]
         let calculator = RatesCalculator(base: base, rates: rates)
-        let control = usdAmount.dividing(by: usdRate).multiplying(by: rubRate)
-        
+        let control = (usdAmount / usdRate) * rubRate
         
         let test = calculator.amount(ofCurrency: "RUB", withOther: "USD", amount: usdAmount)
         
@@ -29,14 +28,14 @@ class RatesCalculatorTests: XCTestCase {
     }
     
     func testDirectRateProperlyCalculated() {
-        let rubRate = NSDecimalNumber(string: "80")
-        let usdRate = NSDecimalNumber(string: "1.2")
-        let eurAmount = NSDecimalNumber(string: "1.5")
+        let rubRate = Decimal(80)
+        let usdRate = Decimal(1.2)
+        let eurAmount = Decimal(1.5)
         
         let base = "EUR"
         let rates = ["RUB" : rubRate, "USD" : usdRate]
         let calculator = RatesCalculator(base: base, rates: rates)
-        let control = eurAmount.multiplying(by: rubRate)
+        let control = eurAmount * rubRate
         
         let test = calculator.amount(ofCurrency: "RUB", withOther: "EUR", amount: eurAmount)
         
@@ -44,9 +43,9 @@ class RatesCalculatorTests: XCTestCase {
     }
     
     func testNotExistingCrossCurrencyIsNotCalculated() {
-        let rubRate = NSDecimalNumber(string: "80")
-        let usdRate = NSDecimalNumber(string: "1.2")
-        let eurAmount = NSDecimalNumber(string: "1.5")
+        let rubRate = Decimal(80)
+        let usdRate = Decimal(1.2)
+        let eurAmount = Decimal(1.5)
         
         let base = "EUR"
         let rates = ["RUB" : rubRate, "USD" : usdRate]
@@ -58,9 +57,9 @@ class RatesCalculatorTests: XCTestCase {
     }
     
     func testNotExistingTargetCurrencyIsNotCalculated() {
-        let rubRate = NSDecimalNumber(string: "80")
-        let usdRate = NSDecimalNumber(string: "1.2")
-        let eurAmount = NSDecimalNumber(string: "1.5")
+        let rubRate = Decimal(80)
+        let usdRate = Decimal(1.2)
+        let eurAmount = Decimal(1.5)
         
         let base = "EUR"
         let rates = ["RUB" : rubRate, "USD" : usdRate]
@@ -72,26 +71,26 @@ class RatesCalculatorTests: XCTestCase {
     }
     
     func testZeroAmountProperlyCalculated() {
-        let rubRate = NSDecimalNumber(string: "80")
-        let usdRate = NSDecimalNumber(string: "1.2")
+        let rubRate = Decimal(80)
+        let usdRate = Decimal(1.2)
         
         let base = "EUR"
         let rates = ["RUB" : rubRate, "USD" : usdRate]
         let calculator = RatesCalculator(base: base, rates: rates)
         
-        let test = calculator.amount(ofCurrency: "RUB", withOther: "EUR", amount: NSDecimalNumber.zero)
+        let test = calculator.amount(ofCurrency: "RUB", withOther: "EUR", amount: Decimal(0))
         
-        XCTAssert(test == NSDecimalNumber.zero)
+        XCTAssert(test == Decimal(0))
     }
     
     func testSameCurrencyReturnsSame() {
-        let rubRate = NSDecimalNumber(string: "80")
-        let usdRate = NSDecimalNumber(string: "1.2")
+        let rubRate = Decimal(80)
+        let usdRate = Decimal(1.2)
         
         let base = "EUR"
         let rates = ["RUB" : rubRate, "USD" : usdRate]
         let calculator = RatesCalculator(base: base, rates: rates)
-        let control = NSDecimalNumber(string: "33.5423")
+        let control = Decimal(33.5423)
         
         let test = calculator.amount(ofCurrency: "RUB", withOther: "RUB", amount: control)
         
@@ -99,64 +98,64 @@ class RatesCalculatorTests: XCTestCase {
     }
     
     func testReturnsNilIfCrossAmountIsNan() {
-        let rubRate = NSDecimalNumber(string: "80")
-        let usdRate = NSDecimalNumber(string: "1.2")
+        let rubRate = Decimal(80)
+        let usdRate = Decimal(1.2)
         
         let base = "EUR"
         let rates = ["RUB" : rubRate, "USD" : usdRate]
         let calculator = RatesCalculator(base: base, rates: rates)
         
-        let test = calculator.amount(ofCurrency: "RUB", withOther: "USD", amount: NSDecimalNumber.notANumber)
+        let test = calculator.amount(ofCurrency: "RUB", withOther: "USD", amount: Decimal.nan)
         
         XCTAssert(test == nil)
     }
     
     func testReturnsNilIfCrossRateIsNan() {
-        let rubRate = NSDecimalNumber(string: "80")
+        let rubRate = Decimal(80)
         
         let base = "EUR"
-        let rates = ["RUB" : rubRate, "USD" : NSDecimalNumber.notANumber]
+        let rates = ["RUB" : rubRate, "USD" : Decimal.nan]
         let calculator = RatesCalculator(base: base, rates: rates)
         
-        let test = calculator.amount(ofCurrency: "RUB", withOther: "USD", amount: NSDecimalNumber.one)
+        let test = calculator.amount(ofCurrency: "RUB", withOther: "USD", amount: Decimal(1))
         
         XCTAssert(test == nil)
     }
     
     func testReturnsNilIfTargetRateIsNan() {
-        let usdRate = NSDecimalNumber(string: "80")
+        let usdRate = Decimal(80)
         
         let base = "EUR"
-        let rates = ["RUB" : NSDecimalNumber.notANumber, "USD" : usdRate]
+        let rates = ["RUB" : Decimal.nan, "USD" : usdRate]
         let calculator = RatesCalculator(base: base, rates: rates)
         
-        let test = calculator.amount(ofCurrency: "RUB", withOther: "USD", amount: NSDecimalNumber.one)
+        let test = calculator.amount(ofCurrency: "RUB", withOther: "USD", amount: Decimal(1))
         
         XCTAssert(test == nil)
     }
     
     func testReturnsNilIfCrossRateIsZero() {
-        let rubRate = NSDecimalNumber(string: "80")
+        let rubRate = Decimal(80)
         
         let base = "EUR"
-        let rates = ["RUB" : rubRate, "USD" : NSDecimalNumber.zero]
+        let rates = ["RUB" : rubRate, "USD" : Decimal(0)]
         let calculator = RatesCalculator(base: base, rates: rates)
         
-        let test = calculator.amount(ofCurrency: "RUB", withOther: "USD", amount: NSDecimalNumber.one)
+        let test = calculator.amount(ofCurrency: "RUB", withOther: "USD", amount: Decimal(1))
         
         XCTAssert(test == nil)
     }
     
     func testReturnsZeroIfTargetRateIsZero() {
-        let usdRate = NSDecimalNumber(string: "80")
+        let usdRate = Decimal(80)
         
         let base = "EUR"
-        let rates = ["RUB" : NSDecimalNumber.zero, "USD" : usdRate]
+        let rates = ["RUB" : Decimal(0), "USD" : usdRate]
         let calculator = RatesCalculator(base: base, rates: rates)
         
-        let test = calculator.amount(ofCurrency: "RUB", withOther: "USD", amount: NSDecimalNumber.one)
+        let test = calculator.amount(ofCurrency: "RUB", withOther: "USD", amount: Decimal(1))
         
-        XCTAssert(test == NSDecimalNumber.zero)
+        XCTAssert(test == Decimal(0))
     }
     
 }
