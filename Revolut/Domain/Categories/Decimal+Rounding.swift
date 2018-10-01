@@ -14,7 +14,7 @@ extension Decimal {
     var roundedCurrency: Decimal {
         var mutableSelf = self
         var rounded: Decimal = Decimal()
-        NSDecimalRound(&rounded, &mutableSelf, 2, .plain)
+        NSDecimalRound(&rounded, &mutableSelf, 2, .bankers)
         return rounded
     }
     

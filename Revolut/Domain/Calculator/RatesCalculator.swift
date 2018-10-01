@@ -24,7 +24,7 @@ class RatesCalculator {
         if crossCurrency == base {
             crossCurrencyRate = Decimal(integerLiteral: 1)
         } else if target == crossCurrency {
-            return crossAmount
+            return crossAmount.roundedCurrency
         } else {
             crossCurrencyRate = rates[crossCurrency]
         }

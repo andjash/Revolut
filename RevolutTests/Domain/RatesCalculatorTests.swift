@@ -179,7 +179,7 @@ class RatesCalculatorTests: XCTestCase {
         
         let test = calculator.amount(ofCurrency: "RUB", withOther: "EUR", amount: Decimal(0.2))
         
-        XCTAssert(test == Decimal(13.06))
+        XCTAssert(test == Decimal(13.06).roundedCurrency)
     }
     
 }

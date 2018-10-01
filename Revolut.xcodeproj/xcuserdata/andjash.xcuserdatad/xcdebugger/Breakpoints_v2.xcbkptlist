@@ -10,7 +10,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RevolutTests/Domain/RatesCalculatorTests.swift"
-            timestampString = "560073158.800813"
+            timestampString = "560113259.617624"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "93"
@@ -32,6 +32,22 @@
             startingLineNumber = "67"
             endingLineNumber = "67"
             landmarkName = "didEditValue(forEntry:newValue:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "RevolutTests/Domain/RatesCalculatorTests.swift"
+            timestampString = "560113259.618185"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "168"
+            endingLineNumber = "168"
+            landmarkName = "testMoneyRoundsUp()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
