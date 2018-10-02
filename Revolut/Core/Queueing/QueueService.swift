@@ -11,22 +11,21 @@ import Foundation
 class QueueService {
     
     func queueNetwork<T>(operation: @escaping () throws -> T,
-                         completion: @escaping (T) -> (),
-                         onError: @escaping (Error) -> (),
-                         finally: @escaping () -> () )  {
+                         completion: ((T) -> ())?,
+                         onError: ((Error) -> ())?,
+                         finally: (() -> ())? )  {
         DispatchQueue.global(qos: .background).async {
-            var result: T!
             do {
-                result = try operation()
+                let result = try operation()
+                DispatchQueue.main.async {
+                    completion?(result)
+                    finally?()
+                }
             } catch {
                 DispatchQueue.main.async {
-                    onError(error)
-                    finally()
+                    onError?(error)
+                    finally?()
                 }
-            }
-            DispatchQueue.main.async {
-                completion(result)
-                finally()
             }
         }
     }

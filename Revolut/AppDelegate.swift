@@ -19,7 +19,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let endpointsProvider = EndpointsProvider()
         let factory = RatesListLoaderFactory(endpointProvider: endpointsProvider)
         let ratesService = RatesListService(factory: factory)
-        let rateListPresenter = RatesListPresenter(rateListService: ratesService, baseCurrency: "EUR")
+        let rateListPresenter = RatesListPresenter(rateListService: ratesService,
+                                                   queueService: QueueService(),
+                                                   baseCurrency: "EUR")
         
         window = UIWindow()
         window?.rootViewController = RatesListViewController(presenter: rateListPresenter)

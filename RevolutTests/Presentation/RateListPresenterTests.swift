@@ -51,39 +51,52 @@ class RateListPresenterTests: XCTestCase {
         }
     }
     
+    class QueueServiceStub : QueueService {
+        override func queueNetwork<T>(operation: @escaping () throws -> T,
+                             completion: ((T) -> ())?,
+                             onError: ((Error) -> ())?,
+                             finally: (() -> ())? )  {
+            var result: T!
+            do {
+                result = try operation()
+                completion?(result)
+            } catch {
+                onError?(error)
+            }
+            finally?()
+        }
+    }
+    
     class RateListLoaderFactoryStub: RatesListLoaderFactory {}
     class EndpointsProviderStub: EndpointsProvider {}
 
     func testShouldStartLoadAfterViewIsReady() {
         let ratesListServiceMock = RatesListServiceMock(factory: RateListLoaderFactoryStub(endpointProvider: EndpointsProviderStub()))
-        let presenter = RatesListPresenter(rateListService: ratesListServiceMock, baseCurrency: "EUR")
+        let presenter = RatesListPresenter(rateListService: ratesListServiceMock, queueService: QueueServiceStub(), baseCurrency: "EUR")
         
         presenter.viewIsReady()
         
-        RunLoop.main.run(until: .init(timeIntervalSinceNow: 0.1))
         XCTAssert(ratesListServiceMock.getRatesCalled)
     }
     
     func testShouldDisplayDataAfterFirstLoad() {
         let ratesListServiceMock = RatesListServiceMock(factory: RateListLoaderFactoryStub(endpointProvider: EndpointsProviderStub()))
         let delegate = RatesListPresenterDelegateMock()
-        let presenter = RatesListPresenter(rateListService: ratesListServiceMock, baseCurrency: "EUR")
+        let presenter = RatesListPresenter(rateListService: ratesListServiceMock, queueService: QueueServiceStub(), baseCurrency: "EUR")
         presenter.delegate = delegate
         
         presenter.viewIsReady()
         
-        RunLoop.main.run(until: .init(timeIntervalSinceNow: 0.1))
         XCTAssert(delegate.displayDataCalled)
     }
     
     func testShouldFocusAfterEditStart() {
         let ratesListServiceMock = RatesListServiceMock(factory: RateListLoaderFactoryStub(endpointProvider: EndpointsProviderStub()))
         let delegate = RatesListPresenterDelegateMock()
-        let presenter = RatesListPresenter(rateListService: ratesListServiceMock, baseCurrency: "EUR")
+        let presenter = RatesListPresenter(rateListService: ratesListServiceMock, queueService: QueueServiceStub(), baseCurrency: "EUR")
         presenter.delegate = delegate
         
         presenter.viewIsReady()
-        RunLoop.main.run(until: .init(timeIntervalSinceNow: 0.1))
         presenter.didStartEditing(forEntry: delegate.entries[0], atIndex: 0)
         
         XCTAssert(delegate.focusCalled)
@@ -92,11 +105,10 @@ class RateListPresenterTests: XCTestCase {
     func testShouldDisplayNewDataAfterEdit() {
         let ratesListServiceMock = RatesListServiceMock(factory: RateListLoaderFactoryStub(endpointProvider: EndpointsProviderStub()))
         let delegate = RatesListPresenterDelegateMock()
-        let presenter = RatesListPresenter(rateListService: ratesListServiceMock, baseCurrency: "EUR")
+        let presenter = RatesListPresenter(rateListService: ratesListServiceMock, queueService: QueueServiceStub(), baseCurrency: "EUR")
         presenter.delegate = delegate
         
         presenter.viewIsReady()
-        RunLoop.main.run(until: .init(timeIntervalSinceNow: 0.1))
         delegate.displayDataCalled = false
         presenter.didStartEditing(forEntry: delegate.entries[0], atIndex: 0)
         presenter.didEditValue(forEntry: delegate.entries[0], newValue: "1")
@@ -107,11 +119,10 @@ class RateListPresenterTests: XCTestCase {
     func testShouldChangeDataAfterEdit() {
         let ratesListServiceMock = RatesListServiceMock(factory: RateListLoaderFactoryStub(endpointProvider: EndpointsProviderStub()))
         let delegate = RatesListPresenterDelegateMock()
-        let presenter = RatesListPresenter(rateListService: ratesListServiceMock, baseCurrency: "EUR")
+        let presenter = RatesListPresenter(rateListService: ratesListServiceMock, queueService: QueueServiceStub(), baseCurrency: "EUR")
         presenter.delegate = delegate
         
         presenter.viewIsReady()
-        RunLoop.main.run(until: .init(timeIntervalSinceNow: 0.2))
         let dataBeforeEdit = delegate.entries[1].value
         presenter.didStartEditing(forEntry: delegate.entries[0], atIndex: 0)
         presenter.didEditValue(forEntry: delegate.entries[0], newValue: "1")
@@ -122,13 +133,12 @@ class RateListPresenterTests: XCTestCase {
     
     func testShouldGetRatesAfterPeriod() {
         let ratesListServiceMock = RatesListServiceMock(factory: RateListLoaderFactoryStub(endpointProvider: EndpointsProviderStub()))
-        let presenter = RatesListPresenter(rateListService: ratesListServiceMock, baseCurrency: "EUR")
-        presenter.updatePeriod = 0.2
+        let presenter = RatesListPresenter(rateListService: ratesListServiceMock, queueService: QueueServiceStub(), baseCurrency: "EUR")
+        presenter.updatePeriod = 0.01
         
         presenter.viewIsReady()
-        RunLoop.main.run(until: .init(timeIntervalSinceNow: 0.1))
         ratesListServiceMock.getRatesCalled = false
-        RunLoop.main.run(until: .init(timeIntervalSinceNow: 0.3))
+        RunLoop.main.run(until: .init(timeIntervalSinceNow: 0.02))
         
         XCTAssert(ratesListServiceMock.getRatesCalled)
     }
@@ -136,15 +146,14 @@ class RateListPresenterTests: XCTestCase {
     func testShouldDisplayDataAfterPeriod() {
         let ratesListServiceMock = RatesListServiceMock(factory: RateListLoaderFactoryStub(endpointProvider: EndpointsProviderStub()))
         let delegate = RatesListPresenterDelegateMock()
-        let presenter = RatesListPresenter(rateListService: ratesListServiceMock, baseCurrency: "EUR")
+        let presenter = RatesListPresenter(rateListService: ratesListServiceMock, queueService: QueueServiceStub(), baseCurrency: "EUR")
         presenter.delegate = delegate
-        presenter.updatePeriod = 0.2
+        presenter.updatePeriod = 0.01
         
         presenter.viewIsReady()
-        RunLoop.main.run(until: .init(timeIntervalSinceNow: 0.1))
         ratesListServiceMock.getRatesCalled = false
         delegate.displayDataCalled = false
-        RunLoop.main.run(until: .init(timeIntervalSinceNow: 0.3))
+        RunLoop.main.run(until: .init(timeIntervalSinceNow: 0.02))
         
         XCTAssert(delegate.displayDataCalled)
     }
@@ -153,16 +162,15 @@ class RateListPresenterTests: XCTestCase {
         let ratesListServiceMock = RatesListServiceMock(factory: RateListLoaderFactoryStub(endpointProvider: EndpointsProviderStub()))
        
         let delegate = RatesListPresenterDelegateMock()
-        let presenter = RatesListPresenter(rateListService: ratesListServiceMock, baseCurrency: "EUR")
+        let presenter = RatesListPresenter(rateListService: ratesListServiceMock, queueService: QueueServiceStub(), baseCurrency: "EUR")
         presenter.delegate = delegate
-        presenter.updatePeriod = 0.2
+        presenter.updatePeriod = 0.01
         
         presenter.viewIsReady()
-        RunLoop.main.run(until: .init(timeIntervalSinceNow: 0.1))
         presenter.didStartEditing(forEntry: delegate.entries[1], atIndex: 1)
         
         let firstAfterEdit = delegate.entries[0].currencyName
-        RunLoop.main.run(until: .init(timeIntervalSinceNow: 0.3))
+        RunLoop.main.run(until: .init(timeIntervalSinceNow: 0.02))
         let firstAfterAutoupdate = delegate.entries[0].currencyName
         
         XCTAssert(firstAfterAutoupdate == firstAfterEdit)
@@ -173,11 +181,10 @@ class RateListPresenterTests: XCTestCase {
         let ratesListServiceMock = RatesListServiceMock(factory: RateListLoaderFactoryStub(endpointProvider: EndpointsProviderStub()))
         ratesListServiceMock.throwsError = true
         let delegate = RatesListPresenterDelegateMock()
-        let presenter = RatesListPresenter(rateListService: ratesListServiceMock, baseCurrency: "EUR")
+        let presenter = RatesListPresenter(rateListService: ratesListServiceMock, queueService: QueueServiceStub(), baseCurrency: "EUR")
         presenter.delegate = delegate
         
         presenter.viewIsReady()
-        RunLoop.main.run(until: .init(timeIntervalSinceNow: 0.1))
         
         XCTAssert(delegate.displayErrorCalled)
     }

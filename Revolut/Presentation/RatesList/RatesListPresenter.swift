@@ -39,10 +39,10 @@ class RatesListPresenter {
     weak var delegate: RatesListPresenterDelegate?
     var updatePeriod: TimeInterval = 1
     
-    init(rateListService: RatesListService, baseCurrency: String) {
+    init(rateListService: RatesListService, queueService: QueueService, baseCurrency: String) {
         self.rateListService = rateListService
         self.baseCurrency = baseCurrency
-        self.queueService = QueueService()
+        self.queueService = queueService
         
         ratesCalculator = RatesCalculator(base: baseCurrency, rates: [:])
         numberFormatter = NumberFormatter()

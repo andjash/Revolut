@@ -27,6 +27,7 @@
 		CCBEB2D12162B37E0041CB53 /* RatesListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CCBEB2CF2162B37E0041CB53 /* RatesListViewController.xib */; };
 		CCBEB2D22162B37E0041CB53 /* RatesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBEB2D02162B37E0041CB53 /* RatesListViewController.swift */; };
 		CCBEB2D5216333EE0041CB53 /* QueueService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBEB2D4216333EE0041CB53 /* QueueService.swift */; };
+		CCDB5C73216405A400FF0D49 /* QueueServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCDB5C72216405A400FF0D49 /* QueueServiceTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +65,7 @@
 		CCBEB2CF2162B37E0041CB53 /* RatesListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RatesListViewController.xib; sourceTree = "<group>"; };
 		CCBEB2D02162B37E0041CB53 /* RatesListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatesListViewController.swift; sourceTree = "<group>"; };
 		CCBEB2D4216333EE0041CB53 /* QueueService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueService.swift; sourceTree = "<group>"; };
+		CCDB5C72216405A400FF0D49 /* QueueServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueServiceTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -202,6 +204,7 @@
 			children = (
 				CC975F602160D4EF0050A2F6 /* JsonParserTests.swift */,
 				CC975F652160D5170050A2F6 /* LoaderTests.swift */,
+				CCDB5C72216405A400FF0D49 /* QueueServiceTests.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -390,6 +393,7 @@
 				CC975F662160D5170050A2F6 /* LoaderTests.swift in Sources */,
 				CC975F612160D4EF0050A2F6 /* JsonParserTests.swift in Sources */,
 				CC975F742160E3CE0050A2F6 /* RateListPresenterTests.swift in Sources */,
+				CCDB5C73216405A400FF0D49 /* QueueServiceTests.swift in Sources */,
 				CC975F7B216122FA0050A2F6 /* RatesCalculatorTests.swift in Sources */,
 				CC975F632160D4FA0050A2F6 /* RatesServiceTests.swift in Sources */,
 			);
