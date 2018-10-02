@@ -26,6 +26,7 @@
 		CC975F7E216205440050A2F6 /* Decimal+Rounding.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC975F7D216205440050A2F6 /* Decimal+Rounding.swift */; };
 		CCBEB2D12162B37E0041CB53 /* RatesListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CCBEB2CF2162B37E0041CB53 /* RatesListViewController.xib */; };
 		CCBEB2D22162B37E0041CB53 /* RatesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBEB2D02162B37E0041CB53 /* RatesListViewController.swift */; };
+		CCBEB2D5216333EE0041CB53 /* QueueService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBEB2D4216333EE0041CB53 /* QueueService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +63,7 @@
 		CC975F7D216205440050A2F6 /* Decimal+Rounding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Decimal+Rounding.swift"; sourceTree = "<group>"; };
 		CCBEB2CF2162B37E0041CB53 /* RatesListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RatesListViewController.xib; sourceTree = "<group>"; };
 		CCBEB2D02162B37E0041CB53 /* RatesListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatesListViewController.swift; sourceTree = "<group>"; };
+		CCBEB2D4216333EE0041CB53 /* QueueService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,6 +128,7 @@
 		CC975F482160D0A10050A2F6 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				CCBEB2D3216333E10041CB53 /* Queueing */,
 				CC975F582160D1A90050A2F6 /* Loader */,
 				CC975F4B2160D0BC0050A2F6 /* Network */,
 				CC975F4A2160D0B50050A2F6 /* Parsing */,
@@ -255,6 +258,14 @@
 			path = Categories;
 			sourceTree = "<group>";
 		};
+		CCBEB2D3216333E10041CB53 /* Queueing */ = {
+			isa = PBXGroup;
+			children = (
+				CCBEB2D4216333EE0041CB53 /* QueueService.swift */,
+			);
+			path = Queueing;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -357,6 +368,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CC975F762160E4780050A2F6 /* RatesListPresenter.swift in Sources */,
+				CCBEB2D5216333EE0041CB53 /* QueueService.swift in Sources */,
 				CC975F572160D1750050A2F6 /* RatesListService.swift in Sources */,
 				CCBEB2D22162B37E0041CB53 /* RatesListViewController.swift in Sources */,
 				CC975F5D2160D1F00050A2F6 /* EndpointsProvider.swift in Sources */,

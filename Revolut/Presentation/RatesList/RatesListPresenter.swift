@@ -27,12 +27,13 @@ class RatesListPresenter {
         let displayValue: String
     }
     
+    private let rateListService: RatesListService
+    private let baseCurrency: String
+    private let queueService: QueueService
+    
     private var data: [DataEntry] = []
     private var origin: Origin
     private var ratesCalculator: RatesCalculator
-    
-    private let rateListService: RatesListService
-    private let baseCurrency: String
     private let numberFormatter: NumberFormatter
     
     weak var delegate: RatesListPresenterDelegate?
@@ -41,6 +42,7 @@ class RatesListPresenter {
     init(rateListService: RatesListService, baseCurrency: String) {
         self.rateListService = rateListService
         self.baseCurrency = baseCurrency
+        self.queueService = QueueService()
         
         ratesCalculator = RatesCalculator(base: baseCurrency, rates: [:])
         numberFormatter = NumberFormatter()
@@ -86,30 +88,25 @@ class RatesListPresenter {
 
     private func loadData() {
         let latestOrigin = origin
-        DispatchQueue.global(qos: .background).async {
-            var ratesList: RatesList!
-            
-            do {
-                ratesList = try self.rateListService.getRates(withBase: self.baseCurrency)
-            } catch {
-                DispatchQueue.main.async {
-                    self.delegate?.display(error: "Unable to load data")
-                }
-                return
-            }
+        
+        queueService.queueNetwork(operation: { () -> ([DataEntry], RatesCalculator) in
+            let ratesList = try self.rateListService.getRates(withBase: self.baseCurrency)
             let newCalculator = RatesCalculator(base: ratesList.base, rates: ratesList.rates)
             let newData = self.createNewData(calculator: newCalculator, origin: latestOrigin)
-                
-            DispatchQueue.main.async {
-                self.data = newData
-                self.ratesCalculator = newCalculator
-                self.delegate?.display(data: newData)
-            }
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + self.updatePeriod, execute: { [weak wself = self] in
-                wself?.loadData()
+            return (newData, newCalculator)
+        }, completion: { [weak self] tuple in
+            guard let `self` = self else { return }
+            self.data = tuple.0
+            self.ratesCalculator = tuple.1
+            self.delegate?.display(data: tuple.0)
+        }, onError: {  [weak self] error in
+            guard let `self` = self else { return }
+            self.delegate?.display(error: "Unable to load data")
+        }, finally: {
+            DispatchQueue.main.asyncAfter(deadline: .now() + self.updatePeriod, execute: { [weak self] in
+                self?.loadData()
             })
-        }
+        })
     }
     
     private func createNewData(calculator: RatesCalculator, origin: Origin) -> [DataEntry] {
