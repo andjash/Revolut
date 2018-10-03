@@ -59,7 +59,9 @@ class RatesListPresenter {
     // MARK - Input
     
     func viewIsReady() {
-        loadData()
+        queueService.execute(operation: { [weak self] scheduleNext in
+            self?.loadData(completion: scheduleNext)
+        }, withPeriod: updatePeriod, untilAlive: self)
     }
     
     func didStartEditing(forEntry entry: DataEntry, atIndex index: Int) {
@@ -86,27 +88,24 @@ class RatesListPresenter {
     
     // MARK: - Private
 
-    private func loadData() {
+    private func loadData(completion: @escaping () -> ()) {
         let latestOrigin = origin
         
+        weak var wself = self
         queueService.queueNetwork(operation: { () -> ([DataEntry], RatesCalculator) in
             let ratesList = try self.rateListService.getRates(withBase: self.baseCurrency)
             let newCalculator = RatesCalculator(base: ratesList.base, rates: ratesList.rates)
             let newData = self.createNewData(calculator: newCalculator, origin: latestOrigin)
             return (newData, newCalculator)
-        }, completion: { [weak self] tuple in
-            guard let `self` = self else { return }
+        }, completion: { tuple in
+            guard let `self` = wself else { return }
             self.data = tuple.0
             self.ratesCalculator = tuple.1
             self.delegate?.display(data: tuple.0)
-        }, onError: {  [weak self] error in
-            guard let `self` = self else { return }
+        }, onError: { error in
+            guard let `self` = wself else { return }
             self.delegate?.display(error: "Unable to load data")
-        }, finally: {
-            DispatchQueue.main.asyncAfter(deadline: .now() + self.updatePeriod, execute: { [weak self] in
-                self?.loadData()
-            })
-        })
+        }, finally: completion)
     }
     
     private func createNewData(calculator: RatesCalculator, origin: Origin) -> [DataEntry] {

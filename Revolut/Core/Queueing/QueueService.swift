@@ -29,4 +29,18 @@ class QueueService {
             }
         }
     }
+    
+    func execute(operation: @escaping ( @escaping () -> ()) -> (), withPeriod period: TimeInterval, untilAlive monitor: AnyObject) {
+        weak var weakMonitor = monitor
+        weak var wself = self
+        operation({
+            DispatchQueue.main.asyncAfter(deadline: .now() + period) {
+                guard let sself = wself else { return }
+                guard let smonitor = weakMonitor else { return }
+                sself.execute(operation: operation, withPeriod: period, untilAlive: smonitor)
+            }
+        })
+      
+        
+    }
 }

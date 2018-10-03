@@ -9,10 +9,10 @@
 import XCTest
 @testable import Revolut
 
-class QueueServiceTests: XCTestCase {
+class QueueServiceTests_QueueNetwork: XCTestCase {
     
     class StubError: Error {}
-
+    
     func testShouldCallOperationBlock() {
         let queueService = QueueService()
         var operationCalled = false
@@ -124,6 +124,53 @@ class QueueServiceTests: XCTestCase {
         
         XCTAssert(passedValue == catchedValue)
     }
-    
+}
 
+class QueueServiceTests_ExecuteWithPeriod: XCTestCase {
+
+    func testShouldCallOperationBlockImmediatly() {
+        let queueService = QueueService()
+        var operationCalled = false
+        let monitor = NSObject()
+        
+        queueService.execute(operation: { proceed in
+            operationCalled = true
+             proceed()
+        }, withPeriod: 2, untilAlive: monitor)
+ 
+        XCTAssert(operationCalled)
+    }
+    
+    func testShouldCallOperationBlockAfterPeriod() {
+        let queueService = QueueService()
+        var operationCalled = false
+        let monitor = NSObject()
+        
+        queueService.execute(operation: { proceed in
+            operationCalled = true
+            proceed()
+        }, withPeriod: 0.2, untilAlive: monitor)
+        RunLoop.main.run(until: .init(timeIntervalSinceNow: 0.1))
+        operationCalled = false
+        RunLoop.main.run(until: .init(timeIntervalSinceNow: 0.1))
+        
+        XCTAssert(operationCalled)
+    }
+    
+    func testShouldNotCallOperationBlockWithoutMonitor() {
+        let queueService = QueueService()
+        var operationCalled = false
+        var monitor = NSObject()
+        
+        queueService.execute(operation: { proceed in
+            operationCalled = true
+            proceed()
+        }, withPeriod: 0.2, untilAlive: monitor)
+        RunLoop.main.run(until: .init(timeIntervalSinceNow: 0.1))
+        operationCalled = false
+        monitor = NSObject()
+        RunLoop.main.run(until: .init(timeIntervalSinceNow: 0.1))
+        
+        XCTAssert(!operationCalled)
+    }
 }
