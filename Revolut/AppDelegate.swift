@@ -19,8 +19,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let endpointsProvider = EndpointsProvider()
         let factory = RatesListLoaderFactory(endpointProvider: endpointsProvider)
         let ratesService = RatesListService(factory: factory)
+        let queueService = QueueService()
+        
         let rateListPresenter = RatesListPresenter(rateListService: ratesService,
-                                                   queueService: QueueService(),
+                                                   queueService: queueService,
                                                    baseCurrency: "EUR")
         
         window = UIWindow()

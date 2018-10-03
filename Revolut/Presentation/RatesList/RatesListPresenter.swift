@@ -92,16 +92,16 @@ class RatesListPresenter {
         let latestOrigin = origin
         
         weak var wself = self
-        queueService.queueNetwork(operation: { () -> ([DataEntry], RatesCalculator) in
+        queueService.queueNetwork(operation: { () -> (RatesCalculator) in
             let ratesList = try self.rateListService.getRates(withBase: self.baseCurrency)
-            let newCalculator = RatesCalculator(base: ratesList.base, rates: ratesList.rates)
-            let newData = self.createNewData(calculator: newCalculator, origin: latestOrigin)
-            return (newData, newCalculator)
-        }, completion: { tuple in
+            return RatesCalculator(base: ratesList.base, rates: ratesList.rates)
+        }, completion: { newCalculator in
             guard let `self` = wself else { return }
-            self.data = tuple.0
-            self.ratesCalculator = tuple.1
-            self.delegate?.display(data: tuple.0)
+            let newRatesData = self.createNewData(calculator: newCalculator, origin: latestOrigin)
+            let mergedData = self.merge(newData: newRatesData, oldData: self.data)
+            self.data = mergedData
+            self.ratesCalculator = newCalculator
+            self.delegate?.display(data: mergedData)
         }, onError: { error in
             guard let `self` = wself else { return }
             self.delegate?.display(error: "Unable to load data")
@@ -134,4 +134,16 @@ class RatesListPresenter {
             return DataEntry(currencyName: entry.currencyName, value: calculatedValueString ?? "0")
         }
     }
+    
+    private func merge(newData: [DataEntry], oldData: [DataEntry]) -> [DataEntry] {
+        let oldCurrenciesSet = Set(oldData.map { $0.currencyName })
+        let newWithoutOld = newData.filter { !oldCurrenciesSet.contains($0.currencyName) }
+        
+        var newCurrenciesDict: [String : String] = [:]
+        newData.forEach { newCurrenciesDict[$0.currencyName] = $0.value }
+        let oldWithNewValues = oldData.map { DataEntry(currencyName: $0.currencyName, value: newCurrenciesDict[$0.currencyName] ?? $0.value) };
+        
+        return oldWithNewValues + newWithoutOld
+    }
+    
 }

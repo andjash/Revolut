@@ -149,8 +149,8 @@ class QueueServiceTests_ExecuteWithPeriod: XCTestCase {
         queueService.execute(operation: { proceed in
             operationCalled = true
             proceed()
-        }, withPeriod: 0.2, untilAlive: monitor)
-        RunLoop.main.run(until: .init(timeIntervalSinceNow: 0.1))
+        }, withPeriod: 0.1, untilAlive: monitor)
+        RunLoop.main.run(until: .init(timeIntervalSinceNow: 0.01))
         operationCalled = false
         RunLoop.main.run(until: .init(timeIntervalSinceNow: 0.1))
         
