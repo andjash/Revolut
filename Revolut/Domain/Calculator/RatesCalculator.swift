@@ -24,7 +24,7 @@ class RatesCalculator {
         if crossCurrency == base {
             crossCurrencyRate = Decimal(integerLiteral: 1)
         } else if target == crossCurrency {
-            return crossAmount.roundedCurrency
+            return crossAmount.rv_roundedCurrency
         } else {
             crossCurrencyRate = rates[crossCurrency]
         }
@@ -44,8 +44,8 @@ class RatesCalculator {
             return nil
         }
         
-        let amountOfBase = (crossAmount / crossCurrencyRate).roundedCurrency
-        return (amountOfBase * targetCurrencyRate).roundedCurrency
+        let amountOfBase = (crossAmount / crossCurrencyRate).rv_roundedCurrency
+        return (amountOfBase * targetCurrencyRate).rv_roundedCurrency
     }
     
     

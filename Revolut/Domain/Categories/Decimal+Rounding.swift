@@ -11,14 +11,14 @@ import Foundation
 
 extension Decimal {
     
-    var roundedCurrency: Decimal {
+    var rv_roundedCurrency: Decimal {
         var mutableSelf = self
         var rounded: Decimal = Decimal()
         NSDecimalRound(&rounded, &mutableSelf, 2, .bankers)
         return rounded
     }
     
-    var roundedDownCurrency: Decimal {
+    var rv_roundedDownCurrency: Decimal {
         var mutableSelf = self
         var rounded: Decimal = Decimal()
         NSDecimalRound(&rounded, &mutableSelf, 2, .down)

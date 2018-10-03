@@ -37,7 +37,7 @@ class RatesListPresenter {
     private let numberFormatter: NumberFormatter
     
     weak var delegate: RatesListPresenterDelegate?
-    var updatePeriod: TimeInterval = 1
+    var updatePeriod: TimeInterval = 3
     
     init(rateListService: RatesListService, queueService: QueueService, baseCurrency: String) {
         self.rateListService = rateListService
@@ -45,13 +45,7 @@ class RatesListPresenter {
         self.queueService = queueService
         
         ratesCalculator = RatesCalculator(base: baseCurrency, rates: [:])
-        numberFormatter = NumberFormatter()
-        numberFormatter.numberStyle = .currency
-        numberFormatter.currencySymbol = ""
-        numberFormatter.maximumFractionDigits = 2
-        numberFormatter.minimumFractionDigits = 0
-        numberFormatter.generatesDecimalNumbers = true
-        numberFormatter.roundingMode = .down
+        numberFormatter = NumberFormatter.rv_defaultCurrencyNumberFormatter()
         
         origin = Origin(amount: Decimal(floatLiteral: 1), currency: baseCurrency, displayValue: numberFormatter.string(from: NSDecimalNumber.one) ?? "1")
     }
@@ -71,7 +65,7 @@ class RatesListPresenter {
     
     func didEditValue(forEntry: DataEntry, newValue: String) {
         let preparedString = newValue.replacingOccurrences(of: numberFormatter.groupingSeparator, with: "")
-        var number = (numberFormatter.number(from: preparedString) as? Decimal ?? Decimal(0)).roundedDownCurrency
+        var number = (numberFormatter.number(from: preparedString) as? Decimal ?? Decimal(0)).rv_roundedDownCurrency
         if number.isNaN {
             number = Decimal(0)
         }
@@ -98,7 +92,7 @@ class RatesListPresenter {
         }, completion: { newCalculator in
             guard let `self` = wself else { return }
             let newRatesData = self.createNewData(calculator: newCalculator, origin: latestOrigin)
-            let mergedData = self.merge(newData: newRatesData, oldData: self.data)
+            let mergedData = self.merge(newData: newRatesData, oldData: self.data, origin: self.origin)
             self.data = mergedData
             self.ratesCalculator = newCalculator
             self.delegate?.display(data: mergedData)
@@ -135,12 +129,17 @@ class RatesListPresenter {
         }
     }
     
-    private func merge(newData: [DataEntry], oldData: [DataEntry]) -> [DataEntry] {
+    private func merge(newData: [DataEntry], oldData: [DataEntry], origin: Origin) -> [DataEntry] {
         let oldCurrenciesSet = Set(oldData.map { $0.currencyName })
         let newWithoutOld = newData.filter { !oldCurrenciesSet.contains($0.currencyName) }
         
         var newCurrenciesDict: [String : String] = [:]
-        newData.forEach { newCurrenciesDict[$0.currencyName] = $0.value }
+        newData.forEach {
+            if $0.currencyName == origin.currency {
+                return
+            }
+            newCurrenciesDict[$0.currencyName] = $0.value
+        }
         let oldWithNewValues = oldData.map { DataEntry(currencyName: $0.currencyName, value: newCurrenciesDict[$0.currencyName] ?? $0.value) };
         
         return oldWithNewValues + newWithoutOld

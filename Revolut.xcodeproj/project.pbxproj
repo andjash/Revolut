@@ -24,6 +24,7 @@
 		CC975F792161204A0050A2F6 /* RatesCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC975F782161204A0050A2F6 /* RatesCalculator.swift */; };
 		CC975F7B216122FA0050A2F6 /* RatesCalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC975F7A216122FA0050A2F6 /* RatesCalculatorTests.swift */; };
 		CC975F7E216205440050A2F6 /* Decimal+Rounding.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC975F7D216205440050A2F6 /* Decimal+Rounding.swift */; };
+		CCB7717021649850004B6366 /* NumberFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB7716F21649850004B6366 /* NumberFormatter.swift */; };
 		CCBEB2D12162B37E0041CB53 /* RatesListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CCBEB2CF2162B37E0041CB53 /* RatesListViewController.xib */; };
 		CCBEB2D22162B37E0041CB53 /* RatesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBEB2D02162B37E0041CB53 /* RatesListViewController.swift */; };
 		CCBEB2D5216333EE0041CB53 /* QueueService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBEB2D4216333EE0041CB53 /* QueueService.swift */; };
@@ -62,6 +63,7 @@
 		CC975F782161204A0050A2F6 /* RatesCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatesCalculator.swift; sourceTree = "<group>"; };
 		CC975F7A216122FA0050A2F6 /* RatesCalculatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatesCalculatorTests.swift; sourceTree = "<group>"; };
 		CC975F7D216205440050A2F6 /* Decimal+Rounding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Decimal+Rounding.swift"; sourceTree = "<group>"; };
+		CCB7716F21649850004B6366 /* NumberFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberFormatter.swift; sourceTree = "<group>"; };
 		CCBEB2CF2162B37E0041CB53 /* RatesListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RatesListViewController.xib; sourceTree = "<group>"; };
 		CCBEB2D02162B37E0041CB53 /* RatesListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatesListViewController.swift; sourceTree = "<group>"; };
 		CCBEB2D4216333EE0041CB53 /* QueueService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueService.swift; sourceTree = "<group>"; };
@@ -257,6 +259,7 @@
 			isa = PBXGroup;
 			children = (
 				CC975F7D216205440050A2F6 /* Decimal+Rounding.swift */,
+				CCB7716F21649850004B6366 /* NumberFormatter.swift */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -375,6 +378,7 @@
 				CC975F572160D1750050A2F6 /* RatesListService.swift in Sources */,
 				CCBEB2D22162B37E0041CB53 /* RatesListViewController.swift in Sources */,
 				CC975F5D2160D1F00050A2F6 /* EndpointsProvider.swift in Sources */,
+				CCB7717021649850004B6366 /* NumberFormatter.swift in Sources */,
 				CC975F792161204A0050A2F6 /* RatesCalculator.swift in Sources */,
 				CC975F6F2160DE380050A2F6 /* RateCell.swift in Sources */,
 				CC975F552160D14E0050A2F6 /* RatesList.swift in Sources */,
