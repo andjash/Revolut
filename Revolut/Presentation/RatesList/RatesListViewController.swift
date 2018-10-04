@@ -71,8 +71,10 @@ class RatesListViewController: UIViewController, UITableViewDelegate, UITableVie
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: RateCell.self)) as! RateCell
+        print("Cell for: \(indexPath.row)")
         bind(entry: data[indexPath.row], toCell: cell)
         cell.textField.delegate = self
+        cell.textField.addTarget(nil, action: #selector(textFieldChanged), for: .editingChanged)
         cell.textField.addTarget(self, action: #selector(textFieldChanged), for: .editingChanged)
         cell.textField.indexPath = indexPath
         
@@ -115,16 +117,17 @@ class RatesListViewController: UIViewController, UITableViewDelegate, UITableVie
         data = allData
         
         let zeroIp = IndexPath(row: 0, section: 0)
-        tableView.moveRow(at: IndexPath(row: atIndex, section: 0), to: zeroIp)
+        let oldIp = IndexPath(row: atIndex, section: 0)
+       
+        (tableView.cellForRow(at: oldIp) as? RateCell)?.textField.indexPath = zeroIp
+        tableView.moveRow(at: oldIp, to: zeroIp)
         tableView.scrollToRow(at: zeroIp, at: .top, animated: true)
         
-        for ip in tableView.indexPathsForVisibleRows ?? [] {
-            if let cell = tableView.cellForRow(at: ip) as? RateCell {
-                if (ip.row == 0) {
-                    cell.textField.becomeFirstResponder()
-                }
-                cell.textField.indexPath = ip
-            }
+        
+        tableView.indexPathsForVisibleRows?.compactMap { ip in
+            return (tableView.cellForRow(at: ip) as? RateCell).flatMap { (ip, $0) }
+        }.forEach { (ip, cell) in
+            cell.textField.indexPath = ip
         }
     }
     
