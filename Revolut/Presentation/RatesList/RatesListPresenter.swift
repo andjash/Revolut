@@ -88,7 +88,10 @@ class RatesListPresenter {
         weak var wself = self
         queueService.queueNetwork(operation: { () -> (RatesCalculator) in
             let ratesList = try self.rateListService.getRates(withBase: self.baseCurrency)
-            return RatesCalculator(base: ratesList.base, rates: ratesList.rates)
+            var rates = ratesList.rates
+            rates[ratesList.base] = Decimal(1)
+            
+            return RatesCalculator(base: ratesList.base, rates: rates)
         }, completion: { newCalculator in
             guard let `self` = wself else { return }
             let newRatesData = self.createNewData(calculator: newCalculator, origin: latestOrigin)

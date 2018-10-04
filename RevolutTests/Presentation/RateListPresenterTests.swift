@@ -125,7 +125,7 @@ class RateListPresenterTests: XCTestCase {
         presenter.viewIsReady()
         let dataBeforeEdit = delegate.entries[1].value
         presenter.didStartEditing(forEntry: delegate.entries[0], atIndex: 0)
-        presenter.didEditValue(forEntry: delegate.entries[0], newValue: "1")
+        presenter.didEditValue(forEntry: delegate.entries[0], newValue: "2")
         let dataAfterEdit = delegate.entries[1].value
         
         XCTAssert(dataBeforeEdit != dataAfterEdit)
@@ -187,6 +187,18 @@ class RateListPresenterTests: XCTestCase {
         presenter.viewIsReady()
         
         XCTAssert(delegate.displayErrorCalled)
+    }
+    
+    func testShouldPresentBaseCurrency() {
+        let ratesListServiceMock = RatesListServiceMock(factory: RateListLoaderFactoryStub(endpointProvider: EndpointsProviderStub()))
+        let delegate = RatesListPresenterDelegateMock()
+        let presenter = RatesListPresenter(rateListService: ratesListServiceMock, queueService: QueueServiceStub(), baseCurrency: "EUR")
+        presenter.delegate = delegate
+        
+        presenter.viewIsReady()
+        
+        let eurEntry = delegate.entries.first(where: { $0.currencyName == "EUR" && $0.value == "1" })
+        XCTAssert(eurEntry != nil)
     }
 
 }
