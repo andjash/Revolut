@@ -11,15 +11,14 @@ import Foundation
 
 extension NumberFormatter {
     
-    static func rv_defaultCurrencyNumberFormatter() -> NumberFormatter {
+    static func rv_defaultDecimalNumberFormatter() -> NumberFormatter {
         let numberFormatter = NumberFormatter()
-        numberFormatter.numberStyle = .currency
-        numberFormatter.currencySymbol = ""
+        numberFormatter.numberStyle = .decimal
         numberFormatter.maximumFractionDigits = 2
         numberFormatter.minimumFractionDigits = 0
-        numberFormatter.maximumIntegerDigits = 13
         numberFormatter.generatesDecimalNumbers = true
         numberFormatter.roundingMode = .down
+        numberFormatter.maximumIntegerDigits = 20
         return numberFormatter
     }
     

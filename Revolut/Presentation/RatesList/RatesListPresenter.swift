@@ -45,7 +45,7 @@ class RatesListPresenter {
         self.queueService = queueService
         
         ratesCalculator = RatesCalculator(base: baseCurrency, rates: [:])
-        numberFormatter = NumberFormatter.rv_defaultCurrencyNumberFormatter()
+        numberFormatter = NumberFormatter.rv_defaultDecimalNumberFormatter()
         
         origin = Origin(amount: Decimal(floatLiteral: 1), currency: baseCurrency, displayValue: numberFormatter.string(from: NSDecimalNumber.one) ?? "1")
     }
@@ -65,17 +65,19 @@ class RatesListPresenter {
     
     func didEditValue(forEntry: DataEntry, newValue: String) {
         let preparedString = newValue.replacingOccurrences(of: numberFormatter.groupingSeparator, with: "")
-        var number = (numberFormatter.number(from: preparedString) as? Decimal ?? Decimal(0)).rv_roundedDownCurrency
+        var number = (Decimal(string: preparedString) ?? Decimal(0)).rv_roundedDownCurrency
         if number.isNaN {
             number = Decimal(0)
         }
 
         var displayValue = numberFormatter.string(from: number as NSDecimalNumber) ?? "0"
-        if newValue.hasSuffix(numberFormatter.decimalSeparator) {
+        let restrictedNUmber = numberFormatter.number(from: displayValue) as? Decimal ?? Decimal(0)
+        
+        if newValue.hasSuffix(numberFormatter.decimalSeparator) && newValue.components(separatedBy: numberFormatter.decimalSeparator).count == 2 {
             displayValue += numberFormatter.decimalSeparator
         }
-     
-        origin = Origin(amount: number, currency: forEntry.currencyName, displayValue: displayValue)
+      
+        origin = Origin(amount: restrictedNUmber, currency: forEntry.currencyName, displayValue: displayValue)
         data = recalculate(oldData: data, calculator: ratesCalculator, origin: origin)
         delegate?.display(data: data)
     }

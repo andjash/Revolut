@@ -71,7 +71,6 @@ class RatesListViewController: UIViewController, UITableViewDelegate, UITableVie
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: RateCell.self)) as! RateCell
-        print("Cell for: \(indexPath.row)")
         bind(entry: data[indexPath.row], toCell: cell)
         cell.textField.delegate = self
         cell.textField.addTarget(nil, action: #selector(textFieldChanged), for: .editingChanged)
