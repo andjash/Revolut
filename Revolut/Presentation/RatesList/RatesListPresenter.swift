@@ -73,7 +73,9 @@ class RatesListPresenter {
         var displayValue = numberFormatter.string(from: number as NSDecimalNumber) ?? "0"
         let restrictedNUmber = numberFormatter.number(from: displayValue) as? Decimal ?? Decimal(0)
         
-        if newValue.hasSuffix(numberFormatter.decimalSeparator) && newValue.components(separatedBy: numberFormatter.decimalSeparator).count == 2 {
+        
+        let decimalParts = newValue.components(separatedBy: numberFormatter.decimalSeparator).filter { $0.count > 0 }
+        if newValue.hasSuffix(numberFormatter.decimalSeparator) && decimalParts.count == 1 {
             displayValue += numberFormatter.decimalSeparator
         }
       
