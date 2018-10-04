@@ -52,9 +52,15 @@ class RatesListViewController: UIViewController, UITableViewDelegate, UITableVie
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.register(UINib(nibName: String(describing: RateCell.self), bundle: nil), forCellReuseIdentifier: String(describing: RateCell.self))
+        tableView.register(UINib(nibName: String(describing: RateCell.self), bundle: nil),
+                           forCellReuseIdentifier: String(describing: RateCell.self))
         loadingIndicatorVisible = true
         presenter.viewIsReady()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)),
+                                               name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)),
+                                               name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     // MARK: - UITableViewDataSource
@@ -166,6 +172,24 @@ class RatesListViewController: UIViewController, UITableViewDelegate, UITableVie
         placeholderLabel.text = text
     }
     
+    
+    @objc private func keyboardWillHide(notification: Notification) {
+        let inset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        
+        tableView.contentInset = inset
+        tableView.scrollIndicatorInsets = inset
+    }
+    
+    @objc private func keyboardWillShow(notification: Notification) {
+        let finalKeyboardFrame = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect) ?? CGRect.zero
+        var bottomInset = finalKeyboardFrame.height;
+        
+        bottomInset -= self.view.window?.safeAreaInsets.bottom ?? 0
+        let inset = UIEdgeInsets(top: 0, left: 0, bottom: bottomInset, right: 0)
+        
+        tableView.contentInset = inset
+        tableView.scrollIndicatorInsets = inset
+    }
     
 }
 
