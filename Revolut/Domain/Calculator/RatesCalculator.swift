@@ -10,26 +10,18 @@ import Foundation
 
 class RatesCalculator {
     
-    let base: String
     let rates: [String : Decimal]
     
-    init(base: String, rates: [String : Decimal]) {
-        self.base = base
+    init(rates: [String : Decimal]) {
         self.rates = rates
     }
     
     func amount(ofCurrency target: String, withOther crossCurrency: String, amount crossAmount: Decimal) -> Decimal? {
-        var crossCurrencyRate: Decimal!
-        
-        if crossCurrency == base {
-            crossCurrencyRate = Decimal(integerLiteral: 1)
-        } else if target == crossCurrency {
+        guard target != crossCurrency else {
             return crossAmount.rv_roundedCurrency
-        } else {
-            crossCurrencyRate = rates[crossCurrency]
         }
         
-        guard crossCurrencyRate != nil else {
+        guard  let crossCurrencyRate = rates[crossCurrency] else {
             return nil
         }
         

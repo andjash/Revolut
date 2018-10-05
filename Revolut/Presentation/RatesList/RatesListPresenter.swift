@@ -44,7 +44,7 @@ class RatesListPresenter {
         self.baseCurrency = baseCurrency
         self.queueService = queueService
         
-        ratesCalculator = RatesCalculator(base: baseCurrency, rates: [:])
+        ratesCalculator = RatesCalculator(rates: [:])
         numberFormatter = NumberFormatter.rv_defaultDecimalNumberFormatter()
         
         origin = Origin(amount: Decimal(floatLiteral: 1), currency: baseCurrency, displayValue: numberFormatter.string(from: NSDecimalNumber.one) ?? "1")
@@ -95,7 +95,7 @@ class RatesListPresenter {
             var rates = ratesList.rates
             rates[ratesList.base] = Decimal(1)
             
-            return RatesCalculator(base: ratesList.base, rates: rates)
+            return RatesCalculator(rates: rates)
         }, completion: { newCalculator in
             guard let `self` = wself else { return }
             let newRatesData = self.createNewData(calculator: newCalculator, origin: latestOrigin)
